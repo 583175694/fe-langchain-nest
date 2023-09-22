@@ -83,33 +83,6 @@ export class AppController {
     return await this.appService.chatfile(body);
 
   }
-  @Post('chatfileOpenai')
-  @ApiBody({
-    description: 'Gpt文档问答',
-    type: ChatGptDto,
- })
-  async chatfileGPT(
-    @Body() body: any,
-  ) {
-    console.log('chatfile-openai',body);
-    console.log('xxxxxxxxxxxx,test');
-
-    return await this.appService.chatfileOpenAI(body);
-  }
-
-
-  @Post('chatOpenAI')
-  @ApiBody({
-    description: 'Gpt对话',
-    type: ChatGptDto,
- })
-  async chatOpenAI(
-    @Body() body,
-  ) {
-    return await this.appService.chatOpenAI(body);
-
-  }
-
   @Post('search')
   @ApiBody({
     description: 'bing搜索',

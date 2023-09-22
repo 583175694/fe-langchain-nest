@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { FileService } from 'src/service/file';
 import {ChatglmService} from 'src/service/chatglm'
-import { ChatopenaiService } from './chatopenai';
 import { BingService } from './bing';
 
 
@@ -18,20 +17,6 @@ export class AppService {
   async chatfile(body) {
     const res=new ChatglmService
     return res.chatfile(body)
-  }
-
-
- //OpenAI交互
-  //文档问答
-   async chatfileOpenAI(body) {
-    const res=new ChatopenaiService
-    return res.chatfileOpenAI(body)
-
-  }
-  //自由对话
-  async chatOpenAI(body) {
-    const res=new ChatopenaiService
-    return res.chatOpenAI(body)
   }
 
   //文件相关处理

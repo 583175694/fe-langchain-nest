@@ -1,22 +1,27 @@
-import { ChatGlm6BLLM } from "../chat_models/chatglm-6b";
 import { LLMChain, loadQAStuffChain } from "langchain/chains";
+import { ChatGlm6BLLM } from "../chat_models/chatglm-6b";
 import {
   SystemMessagePromptTemplate,
   HumanMessagePromptTemplate,
   ChatPromptTemplate,
 } from "langchain/prompts";
+import { HNSWLib } from "langchain/vectorstores/hnswlib";
+import { EmbeddingManager } from "src/embeddings/embedding-manager";
 import { GlobalService } from "src/service/global";
 
 export class ChatglmService {
   //文档问答
   async chatfile(body) {
     const { message, history } = body;
-    console.log("step1", message, history);
+    // console.log("step1", message, history);
 
     // 向量数据库检索
-    const vectorStore = GlobalService.globalVar;
+    const vectorStore: HNSWLib = GlobalService.globalVar;
+    // const retriever = vectorStore.asRetriever();
+    // const docs = await retriever.getRelevantDocuments(message);
+
     const docs = await vectorStore.similaritySearch(message, 3);
-    console.log({ docs });
+
     const fileSourceStr = docs.map((res) => {
       return res.metadata.source;
     });

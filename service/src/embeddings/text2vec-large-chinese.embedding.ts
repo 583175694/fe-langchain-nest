@@ -1,6 +1,6 @@
 import axios from 'axios';
+import { Embeddings } from 'langchain/embeddings/base';
 
-import { Embeddings } from "langchain/embeddings";
 export class T2VLargeChineseEmbeddings extends Embeddings {
     modelName;
     batchSize;
@@ -64,7 +64,7 @@ export class T2VLargeChineseEmbeddings extends Embeddings {
     }
     async embedQuery(text) {
         console.log('my embedding text ', text);
-        
+
         const { data } = await this.embeddingWithRetry({
             documents: text,
         });

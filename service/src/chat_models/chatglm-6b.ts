@@ -1,4 +1,4 @@
-import { BaseChatModel } from 'langchain/chat_models';
+import { BaseChatModel } from 'langchain/chat_models/base';
 import axios from 'axios';
 import { BaseChatMessage, ChatResult } from 'langchain/dist/schema';
 import { AIChatMessage } from 'langchain/schema';
@@ -72,7 +72,7 @@ export class ChatGlm6BLLM extends BaseChatModel {
         .join('') + '\n\nAssistant:'
     );
   }
-  async _generate(messages: BaseChatMessage[]): Promise<ChatResult> {
+  async _generate(messages): Promise<ChatResult> {
     const params = this.invocationParams();
     const res: any = await this.completionWithRetry({
       ...params,
